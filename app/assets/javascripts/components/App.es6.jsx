@@ -74,7 +74,7 @@ class App extends React.Component {
       <div>
         <SearchView onSearch={this.searchForAMovie} />
         {this.searchResultView()}
-        {/* <ExistingSearchesView previousMovies={this.state.previousMovies} popularMovies={this.state.popularMovies} /> */}
+        <ExistingSearchesView previousMovies={this.state.previousMovies} popularMovies={this.state.popularMovies} />
       </div>
     )
   }
