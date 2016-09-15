@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20160915165319) do
   create_table "movies", force: :cascade do |t|
     t.string   "api_url",     null: false
     t.string   "image_url",   null: false
-    t.boolean  "is_popular",  null: false
-    t.boolean  "is_previous", null: false
+    t.boolean  "is_popular"
+    t.boolean  "is_previous"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

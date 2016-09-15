@@ -18,9 +18,8 @@ class MoviesController < ApplicationController
   end
 
   def create
-    popular = [true, false]
     movie = Movie.new(movie_params)
-    movie.is_popular = popular.sample
+    movie.is_popular = random_popularity
     movie.save
     render json: movie
   end
@@ -29,5 +28,10 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:api_url, :image_url, :is_previous, :is_popular)
+  end
+
+  def random_popularity
+    return true if rand(0...1000).even?
+    false
   end
 end
