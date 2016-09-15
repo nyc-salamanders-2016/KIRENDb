@@ -13,7 +13,10 @@ class SearchResultView extends React.Component {
       }
     })
     .done((response) => {
-
+      this.props.updatePrevious(response);
+      if (response.is_popular) {
+        this.props.updatePopular(response);
+      }
     });
   }
 
@@ -23,10 +26,16 @@ class SearchResultView extends React.Component {
       method: "POST",
       data: {
         movie: {
-          api_url: `www.ombdapi.com/?t=${this.props.movie["Title"]}&y=${this.props.movie["Year"]}&tomatoes=true`,
-          image_url: this.props.movie["Poster"],
+          api_url: `http://www.omdbapi.com/?t=${this.props.movie[0]["Title"]}&y=${this.props.movie[0]["Year"]}&tomatoes=true`,
+          image_url: this.props.movie[0]["Poster"],
           is_previous: true
         }
+      }
+    })
+    .done((response) => {
+      this.props.updatePrevious(response);
+      if (response.is_popular) {
+        this.props.updatePopular(response);
       }
     });
   }
@@ -41,7 +50,7 @@ class SearchResultView extends React.Component {
           <p><span>{movie["Rated"]}</span> | <span>{movie["Runtime"]}</span> | <span>{movie["Genre"]}</span> | <span>{movie["Released"]}</span></p>
         </div>
         <div>
-          <p>{movie["Plot"]}</p>
+          <p>Plot: {movie["Plot"]}</p>
         </div>
         <div>
           <p>Stars: {movie["Actors"]}</p>

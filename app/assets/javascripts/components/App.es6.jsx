@@ -23,7 +23,6 @@ class App extends React.Component {
     this.setState({
       searchedMovie: [movie]
     });
-    debugger;
   }
 
   searchResultView() {
