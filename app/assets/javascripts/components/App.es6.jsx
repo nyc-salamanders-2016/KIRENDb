@@ -4,7 +4,9 @@ class App extends React.Component {
     this.state = {
       searchedMovie: [],
       previousMovies: [],
-      popularMovies: []
+      popularMovies: [],
+      loggedIn: this.props.loggedIn,
+      username: this.props.currentUser.username
     };
     this.searchForAMovie = this.searchForAMovie.bind(this);
     this.populatePreviousSearches = this.populatePreviousSearches.bind(this);
@@ -72,7 +74,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <SearchView onSearch={this.searchForAMovie} />
+        <SearchView onSearch={this.searchForAMovie} userSignedIn={this.state.loggedIn} username={this.state.username}/>
         {this.searchResultView()}
         <ExistingSearchesView previousMovies={this.state.previousMovies} popularMovies={this.state.popularMovies} />
       </div>

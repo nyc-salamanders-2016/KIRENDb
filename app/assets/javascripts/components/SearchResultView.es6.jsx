@@ -7,8 +7,7 @@ class SearchResultView extends React.Component {
       data: {
         movie: {
           api_url: `http://www.omdbapi.com/?t=${this.props.movie[0]["Title"]}&y=${this.props.movie[0]["Year"]}&tomatoes=true`,
-          image_url: this.props.movie[0]["Poster"],
-          is_previous: true
+          image_url: this.props.movie[0]["Poster"]
         }
       }
     })
@@ -20,25 +19,25 @@ class SearchResultView extends React.Component {
     });
   }
 
-  componentWillMount() {
-    $.ajax({
-      url: "/movies",
-      method: "POST",
-      data: {
-        movie: {
-          api_url: `http://www.omdbapi.com/?t=${this.props.movie[0]["Title"]}&y=${this.props.movie[0]["Year"]}&tomatoes=true`,
-          image_url: this.props.movie[0]["Poster"],
-          is_previous: true
-        }
-      }
-    })
-    .done((response) => {
-      this.props.updatePrevious(response);
-      if (response.is_popular) {
-        this.props.updatePopular(response);
-      }
-    });
-  }
+  // componentWillMount() {
+  //   $.ajax({
+  //     url: "/movies",
+  //     method: "POST",
+  //     data: {
+  //       movie: {
+  //         api_url: `http://www.omdbapi.com/?t=${this.props.movie[0]["Title"]}&y=${this.props.movie[0]["Year"]}&tomatoes=true`,
+  //         image_url: this.props.movie[0]["Poster"],
+  //         is_previous: true
+  //       }
+  //     }
+  //   })
+  //   .done((response) => {
+  //     this.props.updatePrevious(response);
+  //     if (response.is_popular) {
+  //       this.props.updatePopular(response);
+  //     }
+  //   });
+  // }
 
   render() {
     let movie = this.props.movie[0];
