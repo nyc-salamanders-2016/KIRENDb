@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
   def previous
-    @previous_movies = Movie.where(is_previous: true).order("created_at DESC").limit(5)
+    @user = User.find(session[:user_id])
+    @previous_movies = @user.searched_movies
     if @previous_movies
       render json: @previous_movies
     else
@@ -18,16 +19,18 @@ class MoviesController < ApplicationController
   end
 
   def create
+    @user = User.find(session[:user_id])
     movie = Movie.new(movie_params)
     movie.is_popular = random_popularity
-    movie.save
+    @user.searched_movies << movie
+    @user.save!
     render json: movie
   end
 
   private
 
   def movie_params
-    params.require(:movie).permit(:api_url, :image_url, :is_previous, :is_popular)
+    params.require(:movie).permit(:api_url, :image_url)
   end
 
   def random_popularity

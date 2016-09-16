@@ -1,13 +1,16 @@
 class PreviousSearchesView extends React.Component {
   render() {
     return(
-      <h5>
-        {
-          this.props.movies.map((movie, idx) => {
-            return (<a href={movie.api_url}><img key={idx} src={movie.image_url}/></a>)
-          })
-        }
-      </h5>
+      <div>
+        <h5>Your Previous Searches</h5>
+        <div>
+          {
+            this.props.movies.map((movie, idx) => {
+              return (<a key={idx} href={movie.api_url}><img src={movie.image_url}/></a>)
+            })
+          }
+        </div>
+      </div>
     )
   }
 }

@@ -10,18 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915165319) do
+ActiveRecord::Schema.define(version: 20160916185734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "comments", force: :cascade do |t|
+    t.text     "contents",   null: false
+    t.integer  "user_id",    null: false
+    t.integer  "movie_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "movies", force: :cascade do |t|
-    t.string   "api_url",     null: false
-    t.string   "image_url",   null: false
+    t.string   "api_url",    null: false
+    t.string   "image_url",  null: false
     t.boolean  "is_popular"
-    t.boolean  "is_previous"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "movies_users", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "movie_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username",        null: false
+    t.string   "password_digest", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
