@@ -20,16 +20,17 @@ class MoviesController < ApplicationController
 
   def create
     @user = User.find(session[:user_id])
-    movie = @user.searched_movies.new(movie_params)
+    movie = Movie.new(movie_params)
     movie.is_popular = random_popularity
-    movie.save
+    @user.searched_movies << movie
+    @user.save!
     render json: movie
   end
 
   private
 
   def movie_params
-    params.require(:movie).permit(:api_url, :image_url, :is_popular)
+    params.require(:movie).permit(:api_url, :image_url)
   end
 
   def random_popularity

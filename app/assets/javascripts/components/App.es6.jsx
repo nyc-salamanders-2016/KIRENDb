@@ -17,7 +17,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.populatePreviousSearches();
+    if (this.state.loggedIn) {
+      this.populatePreviousSearches();
+    }
     this.populatePopularSearches();
   }
 
